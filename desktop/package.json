@@ -21,6 +21,7 @@
     "appId": "com.scrivalo.desktop",
     "productName": "Scrivalo",
     "copyright": "Scrivalo",
+    "publish": [{ "provider": "github", "owner": "Teshan12", "repo": "scrivalo-desktop" }],
     "directories": { "output": "dist", "buildResources": "build" },
     "files": ["main.js", "offline.html", "preload.js", "package.json"],
     "artifactName": "Scrivalo-${version}-${os}-${arch}.${ext}",
