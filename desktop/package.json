@@ -1,0 +1,58 @@
+{
+  "name": "scrivalo-desktop",
+  "productName": "Scrivalo",
+  "version": "1.0.0",
+  "description": "Scrivalo for Windows and Mac: the same workspace, in its own window.",
+  "main": "main.js",
+  "author": "Scrivalo",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis --x64 --publish never",
+    "dist:mac": "electron-builder --mac dmg zip --universal --publish never",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.scrivalo.desktop",
+    "productName": "Scrivalo",
+    "copyright": "Scrivalo",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["main.js", "offline.html", "preload.js", "package.json"],
+    "artifactName": "Scrivalo-${version}-${os}-${arch}.${ext}",
+    "win": {
+      "icon": "build/icon.png",
+      "artifactName": "Scrivalo-Setup-x64.${ext}",
+      "target": [{ "target": "nsis", "arch": ["x64"] }]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Scrivalo",
+      "uninstallDisplayName": "Scrivalo"
+    },
+    "mac": {
+      "icon": "build/icon.png",
+      "category": "public.app-category.productivity",
+      "artifactName": "Scrivalo-mac-universal.${ext}",
+      "minimumSystemVersion": "11.0",
+      "identity": "-",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "Scrivalo uses the microphone for voice typing and talking to the study coach.",
+        "NSCameraUsageDescription": "Scrivalo uses the camera only when you choose to take a photo for a page."
+      },
+      "target": [{ "target": "dmg", "arch": ["universal"] }, { "target": "zip", "arch": ["universal"] }]
+    },
+    "dmg": { "title": "Scrivalo ${version}" },
+    "linux": { "icon": "build/icon.png", "target": ["AppImage"], "category": "Office" }
+  }
+}
