@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Scrivalo</title>
+<style>
+  :root { color-scheme: light dark; --bg: #f5f5f5; --fg: #0f172a; --mut: #64748b; --card: #fff; --line: #e5e7eb; --accent: #2f7fd9; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #161616; --fg: #f1f5f9; --mut: #94a3b8; --card: #1f1f1f; --line: #333; } }
+  html, body { height: 100%; margin: 0; }
+  body { background: var(--bg); color: var(--fg); font: 15px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: grid; place-items: center; }
+  main { width: min(420px, 90vw); text-align: center; }
+  svg { width: 64px; height: 64px; margin-bottom: 14px; }
+  h1 { font-size: 22px; margin: 0 0 6px; letter-spacing: -.01em; }
+  p { margin: 0 0 20px; color: var(--mut); }
+  button { font: inherit; font-weight: 600; padding: 10px 22px; border-radius: 10px; border: 0; background: var(--accent); color: #fff; cursor: pointer; }
+  button:hover { filter: brightness(1.08); }
+  small { display: block; margin-top: 18px; color: var(--mut); font-size: 12.5px; }
+</style></head>
+<body><main>
+  <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="6" width="52" height="52" rx="14" fill="#2f7fd9"/><path d="M40 22c-3-3-13-3-14 3-1 6 14 4 13 11-1 7-12 6-15 2" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>
+  <h1>You are offline</h1>
+  <p>Scrivalo could not reach the internet. Anything you already opened is still saved on this computer. Check your connection and try again.</p>
+  <button id="retry">Try again</button>
+  <small>Your work syncs as soon as you are back online.</small>
+</main>
+<script>
+  const to = new URLSearchParams(location.search).get('to') || 'https://app.scrivalo.com/';
+  document.getElementById('retry').onclick = () => { location.href = to; };
+  window.addEventListener('online', () => { location.href = to; });
+</script></body></html>
